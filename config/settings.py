@@ -21,13 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.getenv('DEBUG')
+# DEBUG = os.getenv('DEBUG')
+SECRET_KEY = 'django-insecure-_qpl=q(yz_!-%^==57fexxto4c3bpk)n3jqjlpbyef7=%8w%!_'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS','').split(',')
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 
 
@@ -45,6 +48,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'django_filters',
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
 ]
 
 MIDDLEWARE = [
@@ -154,4 +159,12 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.UserRateThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {"anon": "30/min", "user": "300/min"},
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API-First Notes App",
+    "DESCRIPTION": "API for the API-First Notes App",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
